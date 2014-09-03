@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {% if page.title %}
+        {{ page.title }}
+      {% else %}
+        Cabify API
+      {% endif %}
+    </title>
+
+    <meta charset="utf-8">
+
+    {% stylesheet app %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    {% javascript app %}
+
+  </head>
+  <body>
+    <div class='wrapper'>
+      <div class='container'>
+        {% include header.html %}
+        {{ content }}
+        {% include footer.html %}
+      </div>
+    </div>
+  </body>
+</html>
