@@ -12,7 +12,7 @@ assets:
   #
   # Base URL of assets paths.
   #
-  baseurl: /assets/
+  baseurl: "http://maximobility.github.io/cabify_developer/assets"
   #
   # Pathnames where to find assets relative to the root of the site.
   #
