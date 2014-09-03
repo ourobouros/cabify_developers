@@ -1,4 +1,4 @@
-baseurl: "http://maximobility.github.io/cabify_developer/"
+baseurl: "http://maximobility.github.io/cabify_developer"
 
 #
 # Plugin: jekyll-assets
@@ -12,7 +12,7 @@ assets:
   #
   # Base URL of assets paths.
   #
-  baseurl: "http://maximobility.github.io/cabify_developer/assets"
+  baseurl: /assets/
   #
   # Pathnames where to find assets relative to the root of the site.
   #
