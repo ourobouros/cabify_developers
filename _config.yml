@@ -10,7 +10,7 @@ assets:
   #
   # Base URL of assets paths.
   #
-  baseurl: assets/
+  baseurl: /assets/
   #
   # Pathnames where to find assets relative to the root of the site.
   #
