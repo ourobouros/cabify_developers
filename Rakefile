@@ -18,7 +18,8 @@ namespace :cabify do
     # Compile the Jekyll site using the config.
     Jekyll::Site.new(Jekyll.configuration({
       "source"      => ".",
-      "destination" => "_site"
+      "destination" => "_site",
+      "config" => "_config.yml"
     })).process
 
     # Get the origin to which we are going to push the site.
