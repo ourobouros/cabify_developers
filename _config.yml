@@ -1,5 +1,7 @@
 baseurl: "http://maximobility.github.io/cabify_developer"
 
+sass:
+  style: :compressed
 #
 # Plugin: jekyll-assets
 #

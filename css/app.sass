@@ -1,0 +1,27 @@
+---
+# this ensures Jekyll reads the file to be transformed into CSS later
+# only Main files contain this front matter, not partials.
+---
+
+@import url(http://fonts.googleapis.com/css?family=Raleway:700,500,400)
+
+@import "vendor/pygments.sass"
+@import "vendor/bootstrap.scss"
+
+@import "modules/elements.sass"
+@import "modules/header.sass"
+@import "modules/sidebar.sass"
+@import "modules/table.sass"
+
+.wrapper
+  padding: 70px 0
+
+p.endpoint
+  background-color: #d9edf7
+  padding: 15px
+  border-radius: 4px
+  font-size: 14px
+
+.relative
+  position: relative
+
