@@ -21,8 +21,8 @@ Auth token... lorem ipsum
 ### Response
 
 {% highlight json %}
-  {
-    "...": "...",
-    "...": "..."
-  }
+{
+  "...": "...",
+  "...": "..."
+}
 {% endhighlight %}

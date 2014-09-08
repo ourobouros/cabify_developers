@@ -24,22 +24,9 @@ None
 
 ### Response
 
-```ruby
-  def bla
-    "bla"
-  end
-```
-
-```
-{
-  "bla": "bla",
-  "bla2": "bla2"
-}
-```
-
 {% highlight json %}
-  {
-    "...": "...",
-    "...": "..."
-  }
+{
+  "...": "...",
+  "...": "..."
+}
 {% endhighlight %}
