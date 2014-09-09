@@ -34,13 +34,46 @@ title: Cabify API
         {% capture journey_estimate_post %}{% include endpoints/journey_estimate_post.md %}{% endcapture %}
         {{ journey_estimate_post | markdownify }}
      </div>
+      <div class="resource" id="journey_state_get">
+        {% capture journey_state_get %}{% include endpoints/journey_state_get.md %}{% endcapture %}
+        {{ journey_state_get | markdownify }}
+     </div>
+      <div class="resource" id="journeys_active_get">
+        {% capture journeys_active_get %}{% include endpoints/journeys_active_get.md %}{% endcapture %}
+        {{ journeys_active_get | markdownify }}
+     </div>
     </div>
     <div id="authentication">
-      {% capture api_token %}{% include authentication/api_token.md %}{% endcapture %}
-      {{ api_token | markdownify }}
-
-      {% capture oauth %}{% include authentication/oauth.md %}{% endcapture %}
-      {{ oauth | markdownify }}
+      {% capture intro %}{% include authentication/intro.md %}{% endcapture %}
+      {{ intro | markdownify }}
+      <div id="authentication_api_token">
+        {% capture api_token %}{% include authentication/api_token.md %}{% endcapture %}
+        {{ api_token | markdownify }}
+      </div>
+      <div id="authentication_oauth">
+        {% capture oauth %}{% include authentication/oauth.md %}{% endcapture %}
+        {{ oauth | markdownify }}
+      </div>
+    </div>
+    <div id="reference">
+      {% capture intro %}{% include reference/intro.md %}{% endcapture %}
+      {{ intro | markdownify }}
+      <div id="reference_request">
+        {% capture requests %}{% include reference/requests.md %}{% endcapture %}
+        {{ requests | markdownify }}
+      </div>
+      <div id="reference_response">
+        {% capture responses %}{% include reference/responses.md %}{% endcapture %}
+        {{ responses | markdownify }}
+      </div>
+      <div id="reference_localization">
+        {% capture localization %}{% include reference/localization.md %}{% endcapture %}
+        {{ localization | markdownify }}
+      </div>
+      <div id="reference_rate_limits">
+        {% capture rate_limits %}{% include reference/rate_limits.md %}{% endcapture %}
+        {{ rate_limits | markdownify }}
+      </div>
     </div>
   </div>
 

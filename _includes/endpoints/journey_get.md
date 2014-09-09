@@ -1,17 +1,18 @@
-
 ### Get journey
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
 
-### Resource URL
+#### Resource URL
 
+```
 GET /api/journey
+```
 
-### Authentication
+#### Authentication
 
 Auth token... lorem ipsum
 
-### Params
+#### Params
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -19,4 +20,4 @@ Auth token... lorem ipsum
 | end_loc | Array with floats [lon, lat] | Longitude and Latitude of the end location |
 | message (optional) | String | Additional message for the driver |
 
-### Response
+#### Response
