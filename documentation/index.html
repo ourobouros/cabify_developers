@@ -43,7 +43,7 @@ title: Cabify API
         {{ journeys_active_get | markdownify }}
      </div>
     </div>
-    <div id="authentication">
+    <div id="api_authentication">
       {% capture intro %}{% include authentication/intro.md %}{% endcapture %}
       {{ intro | markdownify }}
       <div id="authentication_api_token">
@@ -55,14 +55,14 @@ title: Cabify API
         {{ oauth | markdownify }}
       </div>
     </div>
-    <div id="reference">
+    <div id="api_reference">
       {% capture intro %}{% include reference/intro.md %}{% endcapture %}
       {{ intro | markdownify }}
-      <div id="reference_request">
+      <div id="reference_requests">
         {% capture requests %}{% include reference/requests.md %}{% endcapture %}
         {{ requests | markdownify }}
       </div>
-      <div id="reference_response">
+      <div id="reference_responses">
         {% capture responses %}{% include reference/responses.md %}{% endcapture %}
         {{ responses | markdownify }}
       </div>
