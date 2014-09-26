@@ -11,7 +11,7 @@ This section describes the rules and general layout of the Cabify API. If you ha
 Current Version
 ---------------
 
-We do not require any specific version of the API to provided in the requests. Our aim is try and avoid such complications and ensure all resources maintain backwards compatibility.
+We do not require any specific version of the API. Our aim is try and avoid complications and ensure all resources maintain backwards compatibility both on create and retrieval.
 
 Schema
 ------
@@ -36,7 +36,33 @@ Some resources also provide dates in a local time zone in addition to a regular 
 REST and Resources
 ------------------
 
-The complete Cabify API follows strict REST concepts of resources.
+The complete Cabify API follows strict REST concepts of resources. A resource is and end-point or URL path on which JSON documents can be created, retrieved, updated, and destroyed using HTTP commands.
 
+The following table describes how the different HTTP actions correspond to activity on a resource end-point:
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>GET</th>
+      <th>POST</th>
+      <th>PUT</th>
+      <th>PATCH</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fetch a document</td>
+      <td>Create a new document without an ID</td>
+      <td>Replace or create a new document with a specific ID</td>
+      <td>Update a subset of existing document attribtues</td>
+      <td>Destroy the document completely</td>
+    </tr>
+  </tbody>
+</table>
+
+Each resource path may contain an ID parameter on the end. Actions that fetch, modify or replace a resource such as GET, PUT, PATCH and DELETE typically require an id parameter to be present. Exceptions exist for resources that are unique to the user's connection and will be clearly defined in the documentation.
+
+The Cabify API does not distinguish collections and single items, each are considered independent resources. You won't for example find documentation regarding journey lists in the journey resource.
 
 
