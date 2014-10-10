@@ -11,7 +11,7 @@ This section describes the rules and general layout of the Cabify API. If you ha
 Current Version
 ---------------
 
-We do not require any specific version of the API. Our aim is try and avoid complications and ensure all resources maintain backwards compatibility both on create and retrieval.
+The Cabify API is undergoing continual development and as such we do not currently require any version data. If at some point in the future we introduce non-backwards compatible changes we will look at providing new end points.
 
 Schema
 ------
@@ -31,6 +31,11 @@ Some resources also provide dates in a local time zone in addition to a regular 
 ~~~
 2012-05-09T13:11:45.000+02:00
 ~~~
+
+Authentication
+--------------
+
+The new Cabify API utilizes OAuth 2.0 authentication. For more details, see the [Authentication page](/authentication).
 
 
 REST and Resources
@@ -61,8 +66,42 @@ The following table describes how the different HTTP actions correspond to activ
   </tbody>
 </table>
 
-Each resource path may contain an ID parameter on the end. Actions that fetch, modify or replace a resource such as GET, PUT, PATCH and DELETE typically require an id parameter to be present. Exceptions exist for resources that are unique to the user's connection and will be clearly defined in the documentation.
+Each resource path may contain an ID parameter on the end. For example:
 
-The Cabify API does not distinguish collections and single items, each are considered independent resources. You won't for example find documentation regarding journey lists in the journey resource.
+```
+GET /api/journeys/09e1bc6081256de35996c69e24435f6f
+```
 
+Actions that fetch, modify or replace a resource such as GET, PUT, PATCH and DELETE typically require an id parameter to be present. Exceptions exist for resources that are unique to the user's connection and will be clearly defined in the documentation.
+
+The Cabify API does not distinguish collections and single items, each are considered independent resources. The following examples are all independent resources:
+
+```
+GET /api/journey/09e1bc6081256de35996c69e24435f6f
+GET /api/journeys
+GET /api/regions
+```
+
+Error Handling
+--------------
+
+All error handling via the Cabify API is handled using HTTP status codes. Anything other than a `200 OK` response should be considered an error. There are several scenarios in which errors may occur:
+
+1. Syntax and server errors will return either a `400 Bad Request` or `50X` reponses. Typically they will include a message body provided in text which should not be shown to the end user:
+
+```
+HTTP/1.1 400 Bad Request
+Content-Length: 22
+
+Problems parsing JSON.
+```
+
+2. If the server understands the request but no resource exists.
+
+2. Requests that a syntantically valid or where the server is responding correctly but does not know how to deal with the request will attempt to return
+
+```
+HTTP/1.1 403 Forbidden
+
+``` 
 
