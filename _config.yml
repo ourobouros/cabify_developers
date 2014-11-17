@@ -3,6 +3,6 @@ markdown_ext: md
 safe: true
 highlighter: pygments
 # baseurl: "http://maximobility.github.io/cabify_developer"
-baseurl: "/developers.cabify.com"
+baseurl: ""
 sass:
   style: :compressed
