@@ -31,8 +31,7 @@ Some resources also provide dates in a local time zone in addition to a regular 
 
 ## Authentication
 
-The new Cabify API utilizes OAuth 2.0 authentication. For more details, see the [Authentication page](authentication.html).
-
+The Cabify API utilizes OAuth 2.0 authentication. For more details, see the [Authentication page](authentication.html).
 
 ## REST and Resources
 
@@ -77,10 +76,22 @@ GET /api/journeys
 GET /api/regions
 ~~~
 
+To determine the actions that a specific resource supports, you can send an HTTP OPTIONS to the resource URL:
+
+{% highlight bash %}
+$ curl -i -X OPTIONS -H "Authentication: ------" https://cabify.com/api/journey
+{% endhighlight %}
+
+The response headers should include:
+
+~~~
+HTTP/1.1 204 No Content
+Allow: GET, OPTIONS, PATCH, POST, PUT
+~~~
+
 ## Error Handling
 
-All error handling via the Cabify API is handled using HTTP status codes. Anything other than a `200 OK` response should be considered an error. There are several scenarios in which errors may occur:
-
+All error handling via the Cabify API is handled using HTTP status codes. Anything other than a `200 OK` or `204 No Content` response should be considered an error. There are several scenarios in which errors may occur.
 
 ### Syntax and Server Errors
 
