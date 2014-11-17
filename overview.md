@@ -31,7 +31,7 @@ Some resources also provide dates in a local time zone in addition to a regular 
 
 ## Authentication
 
-The new Cabify API utilizes OAuth 2.0 authentication. For more details, see the [Authentication page](/authentication).
+The new Cabify API utilizes OAuth 2.0 authentication. For more details, see the [Authentication page](authentication.html).
 
 
 ## REST and Resources
