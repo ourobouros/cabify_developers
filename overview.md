@@ -13,11 +13,11 @@ The Cabify API does not currently support API versioning. While the project is c
 
 ## Schema
 
-Access to the API is only permitted via HTTPS to the `cabify.com` domain. All data must be sent and received using JSON with the few notable exceptions of some OAuth authentication requests which accept regular www form data.
+Access to the API is only permitted via HTTPS to the `cabify.com` domain. All data must be sent and received using JSON with the few notable exceptions of some OAuth authentication requests which accept regular web form data.
 
-All requests to the api include the `/api` path. Any URL that does not include this is likely to be related to a web site that may be visited by a user using a browser.
+All requests to the API include the `/api` path. Any URL that does not include this is likely to be related to a web site that may be visited by a user using a browser.
 
-Any properties that end in an `_at` suffix will be provided in ISO 8601 format in UTC including miliseconds:
+Any properties that end in an `_at` suffix will be provided in ISO 8601 format in UTC including milliseconds:
 
 ~~~
 YYYY-MM-DDTHH:MM:SS.mmmZ
@@ -55,7 +55,7 @@ The following table describes how the different HTTP actions correspond to activ
       <td>Fetch a document</td>
       <td>Create a new document without an ID</td>
       <td>Replace or create a new document with a specific ID</td>
-      <td>Update a subset of existing document attribtues</td>
+      <td>Update a subset of existing document attributes</td>
       <td>Destroy the document completely</td>
     </tr>
   </tbody>
@@ -84,7 +84,7 @@ All error handling via the Cabify API is handled using HTTP status codes. Anythi
 
 ### Syntax and Server Errors
 
-Syntax and server errors will return either a `400 Bad Request` or `50X` reponses. Typically they will include a message body provided in text which should not be shown to the end user:
+Syntax and server errors will return either a `400 Bad Request` or `50X` responses. Typically they will include a message body provided in text which should not be shown to the end user:
 
 ~~~
 HTTP/1.1 400 Bad Request
@@ -99,7 +99,7 @@ If the server understands the request but no resource exists at the specific URL
 
 ### Forbidden
 
-Requests that a syntantically valid or where the server is responding correctly but does not know how to deal with the request will attempt to return
+Requests that a syntactically valid or where the server is responding correctly but does not know how to deal with the request will attempt to return
 
 ~~~
 HTTP/1.1 403 Forbidden
