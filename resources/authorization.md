@@ -15,7 +15,7 @@ Authorization resources are used to grant users access to and perform actions on
 
  * `POST` - log in
  * `GET` - check details are still valid
- * `DESTROY` - log out
+ * `DELETE` - log out
 
 ## Authentication
 
