@@ -92,8 +92,28 @@ Also some vehicle types can be not available for reservation, this is indicated 
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Start point outside of Cabify regions</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p>If we request an estimate from outside the places we operate, a 404 error is returned. In this example, the start stop is in the Atlantic Ocean.</p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
-    <span class="hljs-string">"0.1, 0.1"</span>,
-    <span class="hljs-string">"40.522751, -3.890156"</span>
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">0.1</span>,
+        <span class="hljs-number">0.1</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.522751</span>,
+        -<span class="hljs-number">3.890156</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
+    </span>}
   ]</span>,
   "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-12-23 15:09"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
