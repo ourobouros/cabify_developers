@@ -1,352 +1,111 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Internal Cabify API</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:#554;background:#fafaf9;font:400 14px / 1.6 "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif}header{margin-bottom:15px}h1,h2,h3,h4,h5{color:#554;margin:15px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease;text-decoration:none;color:rgba(0,0,0,0.5)}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:600 20px/60px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;font-size:36px}h2{font:600 20px/60px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;font-size:30px}h3{font-size:100%}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#1675A9;font-weight:500;text-decoration:underline}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:7.5px;margin:15px auto;background-image:linear-gradient(to right, rgba(85,85,68,0) 20%, rgba(85,85,68,0.2) 51.4%, rgba(250,250,249,0.2) 51.4%, rgba(250,250,249,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(85,85,68,0.5);font-size:15.5px;padding:10px 20px;margin:15px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:15px;border:1px solid #cfcfcf;border-radius:4px;overflow:auto}pre code{color:#554;background-color:transparent;padding:0;border:none}code{color:rgba(0,0,0,0.6);background-color:#eed;font-family:'Inconsolata',monospace;padding:1px 4px;border:none;border-radius:3px}ul,ol{padding-left:1.2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:15px}table tr:nth-child(2n){background-color:#f5f5f3}table th,table td{padding:7.5px 15px;border:1px solid #e3e3dd}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:600 .33333333px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:#554;background-color:#eaf2f7;border-left:4px solid #2791d9}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#3498db}.warning{color:#554;background-color:#f7ece9;border-left:4px solid #d62c1a}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#d62c1a}header{margin-top:30px}nav{position:fixed;top:30px;bottom:0;overflow-y:auto}nav .resource-group{padding:0;background:transparent;border:none}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:15px;right:15px;opacity:.5}nav .resource-group .heading a{display:block;color:#554;opacity:.7;margin:0;border:none;padding:0;color:rgba(85,85,68,0.7)}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:#554;padding:10px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-15px}nav ul>li:last-child{margin-bottom:-15px}nav ul ul a{padding-left:30px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:left;width:20px;height:20px;text-align:center;line-height:20px;font-size:12px;color:#000;background-color:transparent;border-radius:10px;margin:-2px 5px 0 0}.badge.get{color:white;background-color:#3498db}.badge.head{color:white;background-color:#3498db}.badge.options{color:white;background-color:#3498db}.badge.put{color:white;background-color:#f39c12}.badge.patch{color:white;background-color:#f39c12}.badge.post{color:white;background-color:#18bc9c}.badge.delete{color:white;background-color:#e74c3c}.collapse-button{float:right}.collapse-button span{display:block;color:#443;font-weight:500;text-decoration:underline}.collapse-button .close{display:none;cursor:pointer}.collapse-button .open{cursor:pointer}.collapse-button.show .close{display:block}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:250px;width:690px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:30px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:15px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:15px}.right a{color:#1675A9}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:#fafaf9}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:15px}.triple .resource-heading{font-size:125%}.definition{margin-top:15px;margin-bottom:15px;display:-webkit-flex;display:flex;font-size:0}.definition>span{font:400 14px / 1.6 "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif}.definition .method{padding:2px 10px;border-radius:4px 0 0 4px;color:white;font-weight:500}.definition .method.get{background-color:#3498db}.definition .method.head{background-color:#3498db}.definition .method.options{background-color:#3498db}.definition .method.post{background-color:#18bc9c}.definition .method.put{background-color:#f39c12}.definition .method.patch{background-color:#f39c12}.definition .method.delete{background-color:#e74c3c}.definition .uri{word-break:break-all;padding:2px 10px;word-wrap:break-word;background-color:#eed;border-radius:0 4px 4px 0;font-family:'Inconsolata',monospace}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:15px;border-radius:4px}.example-names .tab-button{cursor:pointer;color:#554;border:1px solid #ddd;padding:7.5px;margin-left:15px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:#fafaf9;border:1px solid #666;border-radius:4px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:18px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-15px;top:-15px;bottom:-15px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:230px;width:600px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:200px;width:520px}}@media (max-width:768px){nav{display:none}.container{width:100%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:100%}#nav-background{display:none}#right-panel-background{width:48.6%}.action h4.action-heading .name{display:none}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(85,85,68,0.5);background-color:transparent;text-decoration:none !important;border-top:1px solid #e2e2e2;border-left:1px solid #e2e2e2;border-right:1px solid #e2e2e2;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:0;margin-bottom:40px;background-color:white;border:1px solid #e2e2e2;border-radius:4px}.resource-group>*:not(.resource){margin-left:15px;margin-right:15px}.resource-group>p:first-of-type{margin-top:15px}.resource-group .resource-heading{font:600 16px / 3 "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;height:40px;padding:0 15px;margin:0;color:white;font-weight:500}.resource-group .resource-heading+.action>.action-heading{padding-top:40px;margin-top:-41px}.resource-group h2.group-heading,.resource-group .heading a{padding:0 15px;margin:0;background-color:transparent;border-bottom:1px solid #e2e2e2;border-top-left-radius:4px;border-top-right-radius:4px;font:600 20px/60px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;height:60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 15px 0;border:1px solid #e2e2e2}nav .resource-group{margin-botom:40px}nav .resource-group a{text-decoration:none}nav .resource-group .chevron{display:none}nav .resource-group .heading a{margin-bottom:0;height:auto;text-transform:uppercase;text-shadow:0 1px 0 white;font:600 12px/150% "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:15px;padding:0 15px 0 15px}.action h3.resource-heading+.action{padding-top:40px;background:red}.action h4.action-heading{padding:15px 15px 0 15px;margin:-1px -16px 16px -16px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:40px}.action h4.action-heading .name{float:right;font-weight:normal;line-height:2em;color:rgba(255,255,255,0.6)}.action h4.action-heading .method{padding:3px 10px 2px 10px;line-height:2em;border-radius:4px 0 0 4px;background:rgba(255,255,255,0.7);text-decoration:none;font-weight:600;font-size:13px}.action h4.action-heading .method.get{color:#217dbb}.action h4.action-heading .method.head{color:#217dbb}.action h4.action-heading .method.options{color:#217dbb}.action h4.action-heading .method.put{color:#c87f0a}.action h4.action-heading .method.patch{color:#c87f0a}.action h4.action-heading .method.post{color:#128f76}.action h4.action-heading .method.delete{color:#d62c1a}.action h4.action-heading code{color:rgba(255,255,255,0.6);background-color:rgba(0,0,0,0.4);border:none;font-weight:normal;line-height:2em;border-radius:0 4px 4px 0;padding:4px 15px}.action dl.inner{padding-bottom:2px}.action .title{border-top:1px solid #F2F2F2;margin:0 -15px -1px -15px;padding:15px;position:relative}.action .title code{font-weight:normal}.action .title .collapse-button{position:absolute;top:0;left:0;right:0;text-align:right;float:none;height:50px;line-height:50px}.action .title .collapse-button span{position:relative;width:100%;height:100%;padding-right:15px;box-sizing:border-box;-moz-box-sizing:border-box}.action .title .collapse-button span.open:hover{background:rgba(0,0,0,0.02)}.action .title .collapse-button.show span.open{display:none}.action h4.action-heading{border:solid transparent 1px}.action.get{border-color:#2791d9}.action.get h4.action-heading{color:white;background:#3498db;border-left-color:#2791d9;border-right-color:#2791d9}.action.head{border-color:#2489cc}.action.head h4.action-heading{color:white;background:#3498db;border-left-color:#2489cc;border-right-color:#2489cc}.action.options{border-color:#2489cc}.action.options h4.action-heading{color:white;background:#3498db;border-left-color:#2489cc;border-right-color:#2489cc}.action.post h4.action-heading{color:white;background:#18bc9c;border-left-color:#16ae91;border-right-color:#16ae91}.action.put h4.action-heading{color:white;background:#f39c12;border-left-color:#ea940c;border-right-color:#ea940c}.action.patch h4.action-heading{color:white;background:#f39c12;border-left-color:#db8b0b;border-right-color:#db8b0b}.action.delete h4.action-heading{color:white;background:#e74c3c;border-left-color:#e53f2e;border-right-color:#e53f2e}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#user-locations">User Locations</a></div><div class="collapse-content"><ul><li><a href="#user-locations-create-a-new-location-post"><span class="badge post"><i class="fa fa-plus"></i></span>Create a new location</a></li><li><a href="#user-locations-update-location-patch"><span class="badge patch"><i class="fa fa-pencil"></i></span>Update location</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#here-service">Here Service</a></div><div class="collapse-content"><ul><li><a href="#here-service-what-is-here?-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>What is here?</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#places-service">Places Service</a></div><div class="collapse-content"><ul><li><a href="#places-service-get-suggestions-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get suggestions</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#place-retrieval">Place retrieval</a></div><div class="collapse-content"><ul><li><a href="#place-retrieval-reverse-geocoding-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Reverse Geocoding</a></li><li><a href="#place-retrieval-inflating-a-suggestion-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Inflating a Suggestion</a></li></ul></div></div></nav><div class="content"><header><h1 id="top">Internal Cabify API</h1></header><section id="user-locations" class="resource-group"><h2 class="group-heading">User Locations <a href="#user-locations" class="permalink">&para;</a></h2><div id="user-locations-create-a-new-location" class="resource"><h3 class="resource-heading">Create a new location <a href="#user-locations-create-a-new-location" class="permalink">&nbsp;&para;</a></h3><div id="user-locations-create-a-new-location-post" class="action post"><h4 class="action-heading"><div class="name">Create a new location</div><a href="#user-locations-create-a-new-location-post" class="method post">POST</a><code class="uri">/api/user/location</code></h4><p>Allows an authenticated user to create a new location and save it in her personal list.</p>
-<p>Locations are expected to be created as copies of other locations, with additional details such as special instructions for the driver.</p>
-<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/user/location</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.1185173</span>
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Cabify Public API</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:#554;background:#fafaf9;font:400 14px / 1.6 "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif}header{margin-bottom:15px}h1,h2,h3,h4,h5{color:#554;margin:15px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease;text-decoration:none;color:rgba(0,0,0,0.5)}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:600 20px/60px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;font-size:36px}h2{font:600 20px/60px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;font-size:30px}h3{font-size:100%}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#1675A9;font-weight:500;text-decoration:underline}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:7.5px;margin:15px auto;background-image:linear-gradient(to right, rgba(85,85,68,0) 20%, rgba(85,85,68,0.2) 51.4%, rgba(250,250,249,0.2) 51.4%, rgba(250,250,249,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(85,85,68,0.5);font-size:15.5px;padding:10px 20px;margin:15px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:15px;border:1px solid #cfcfcf;border-radius:4px;overflow:auto}pre code{color:#554;background-color:transparent;padding:0;border:none}code{color:rgba(0,0,0,0.6);background-color:#eed;font-family:'Inconsolata',monospace;padding:1px 4px;border:none;border-radius:3px}ul,ol{padding-left:1.2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:15px}table tr:nth-child(2n){background-color:#f5f5f3}table th,table td{padding:7.5px 15px;border:1px solid #e3e3dd}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:600 .33333333px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:#554;background-color:#eaf2f7;border-left:4px solid #2791d9}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#3498db}.warning{color:#554;background-color:#f7ece9;border-left:4px solid #d62c1a}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#d62c1a}header{margin-top:30px}nav{position:fixed;top:30px;bottom:0;overflow-y:auto}nav .resource-group{padding:0;background:transparent;border:none}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:15px;right:15px;opacity:.5}nav .resource-group .heading a{display:block;color:#554;opacity:.7;margin:0;border:none;padding:0;color:rgba(85,85,68,0.7)}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:#554;padding:10px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-15px}nav ul>li:last-child{margin-bottom:-15px}nav ul ul a{padding-left:30px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:left;width:20px;height:20px;text-align:center;line-height:20px;font-size:12px;color:#000;background-color:transparent;border-radius:10px;margin:-2px 5px 0 0}.badge.get{color:white;background-color:#3498db}.badge.head{color:white;background-color:#3498db}.badge.options{color:white;background-color:#3498db}.badge.put{color:white;background-color:#f39c12}.badge.patch{color:white;background-color:#f39c12}.badge.post{color:white;background-color:#18bc9c}.badge.delete{color:white;background-color:#e74c3c}.collapse-button{float:right}.collapse-button span{display:block;color:#443;font-weight:500;text-decoration:underline}.collapse-button .close{display:none;cursor:pointer}.collapse-button .open{cursor:pointer}.collapse-button.show .close{display:block}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:250px;width:690px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:30px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:15px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:15px}.right a{color:#1675A9}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:#fafaf9}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:15px}.triple .resource-heading{font-size:125%}.definition{margin-top:15px;margin-bottom:15px;display:-webkit-flex;display:flex;font-size:0}.definition>span{font:400 14px / 1.6 "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif}.definition .method{padding:2px 10px;border-radius:4px 0 0 4px;color:white;font-weight:500}.definition .method.get{background-color:#3498db}.definition .method.head{background-color:#3498db}.definition .method.options{background-color:#3498db}.definition .method.post{background-color:#18bc9c}.definition .method.put{background-color:#f39c12}.definition .method.patch{background-color:#f39c12}.definition .method.delete{background-color:#e74c3c}.definition .uri{word-break:break-all;padding:2px 10px;word-wrap:break-word;background-color:#eed;border-radius:0 4px 4px 0;font-family:'Inconsolata',monospace}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:15px;border-radius:4px}.example-names .tab-button{cursor:pointer;color:#554;border:1px solid #ddd;padding:7.5px;margin-left:15px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:#fafaf9;border:1px solid #666;border-radius:4px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:18px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-15px;top:-15px;bottom:-15px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:230px;width:600px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:200px;width:520px}}@media (max-width:768px){nav{display:none}.container{width:100%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:100%}#nav-background{display:none}#right-panel-background{width:48.6%}.action h4.action-heading .name{display:none}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(85,85,68,0.5);background-color:transparent;text-decoration:none !important;border-top:1px solid #e2e2e2;border-left:1px solid #e2e2e2;border-right:1px solid #e2e2e2;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:0;margin-bottom:40px;background-color:white;border:1px solid #e2e2e2;border-radius:4px}.resource-group>*:not(.resource){margin-left:15px;margin-right:15px}.resource-group>p:first-of-type{margin-top:15px}.resource-group .resource-heading{font:600 16px / 3 "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;height:40px;padding:0 15px;margin:0;color:white;font-weight:500}.resource-group .resource-heading+.action>.action-heading{padding-top:40px;margin-top:-41px}.resource-group h2.group-heading,.resource-group .heading a{padding:0 15px;margin:0;background-color:transparent;border-bottom:1px solid #e2e2e2;border-top-left-radius:4px;border-top-right-radius:4px;font:600 20px/60px "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif;height:60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 15px 0;border:1px solid #e2e2e2}nav .resource-group{margin-botom:40px}nav .resource-group a{text-decoration:none}nav .resource-group .chevron{display:none}nav .resource-group .heading a{margin-bottom:0;height:auto;text-transform:uppercase;text-shadow:0 1px 0 white;font:600 12px/150% "Avenir Next","Avenir","Frutiger","Segoe UI",Arial,sans-serif}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:15px;padding:0 15px 0 15px}.action h3.resource-heading+.action{padding-top:40px;background:red}.action h4.action-heading{padding:15px 15px 0 15px;margin:-1px -16px 16px -16px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:40px}.action h4.action-heading .name{float:right;font-weight:normal;line-height:2em;color:rgba(255,255,255,0.6)}.action h4.action-heading .method{padding:3px 10px 2px 10px;line-height:2em;border-radius:4px 0 0 4px;background:rgba(255,255,255,0.7);text-decoration:none;font-weight:600;font-size:13px}.action h4.action-heading .method.get{color:#217dbb}.action h4.action-heading .method.head{color:#217dbb}.action h4.action-heading .method.options{color:#217dbb}.action h4.action-heading .method.put{color:#c87f0a}.action h4.action-heading .method.patch{color:#c87f0a}.action h4.action-heading .method.post{color:#128f76}.action h4.action-heading .method.delete{color:#d62c1a}.action h4.action-heading code{color:rgba(255,255,255,0.6);background-color:rgba(0,0,0,0.4);border:none;font-weight:normal;line-height:2em;border-radius:0 4px 4px 0;padding:4px 15px}.action dl.inner{padding-bottom:2px}.action .title{border-top:1px solid #F2F2F2;margin:0 -15px -1px -15px;padding:15px;position:relative}.action .title code{font-weight:normal}.action .title .collapse-button{position:absolute;top:0;left:0;right:0;text-align:right;float:none;height:50px;line-height:50px}.action .title .collapse-button span{position:relative;width:100%;height:100%;padding-right:15px;box-sizing:border-box;-moz-box-sizing:border-box}.action .title .collapse-button span.open:hover{background:rgba(0,0,0,0.02)}.action .title .collapse-button.show span.open{display:none}.action h4.action-heading{border:solid transparent 1px}.action.get{border-color:#2791d9}.action.get h4.action-heading{color:white;background:#3498db;border-left-color:#2791d9;border-right-color:#2791d9}.action.head{border-color:#2489cc}.action.head h4.action-heading{color:white;background:#3498db;border-left-color:#2489cc;border-right-color:#2489cc}.action.options{border-color:#2489cc}.action.options h4.action-heading{color:white;background:#3498db;border-left-color:#2489cc;border-right-color:#2489cc}.action.post h4.action-heading{color:white;background:#18bc9c;border-left-color:#16ae91;border-right-color:#16ae91}.action.put h4.action-heading{color:white;background:#f39c12;border-left-color:#ea940c;border-right-color:#ea940c}.action.patch h4.action-heading{color:white;background:#f39c12;border-left-color:#db8b0b;border-right-color:#db8b0b}.action.delete h4.action-heading{color:white;background:#e74c3c;border-left-color:#e53f2e;border-right-color:#e53f2e}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#choosing-the-language">Choosing the language</a></div><div class="collapse-content"><ul><li><a href="#header-the-accept-language-header">The Accept-Language header</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#estimates">Estimates</a></div><div class="collapse-content"><ul><li><a href="#estimates-estimate-journeys-post"><span class="badge post"><i class="fa fa-plus"></i></span>Get Estimates</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#bookings">Bookings</a></div><div class="collapse-content"><ul><li><a href="#bookings-make-a-booking-post"><span class="badge post"><i class="fa fa-plus"></i></span>Make a booking</a></li><li><a href="#bookings-retrieve-booking-information-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Retrieve booking information</a></li><li><a href="#bookings-booking-state">Booking State</a><ul><li><a href="#bookings-booking-state-post"><span class="badge post"><i class="fa fa-plus"></i></span>Cancel booking</a></li><li><a href="#bookings-booking-state-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Check booking state</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#webhooks">Webhooks</a></div><div class="collapse-content"><ul><li><a href="#header-booking-status-updates">Booking status updates</a></li></ul></div></div></nav><div class="content"><header><h1 id="top">Cabify Public API</h1></header><p>This is the public API offered by Cabify to 3rd parties for integration with our services.</p>
+<section id="choosing-the-language" class="resource-group"><h2 class="group-heading">Choosing the language <a href="#choosing-the-language" class="permalink">&para;</a></h2><h3 id="header-the-accept-language-header">The Accept-Language header <a class="permalink" href="#header-the-accept-language-header" aria-hidden="true">¶</a></h3>
+<p>Response values that are available in multiple languages are provided in the language of the Cabify user owning the API key.</p>
+<p>It is possible to specify another language by using the standard HTTP header <code>Accept-Language</code>. For instance:</p>
+<pre><code><span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en</span></code></pre>
+<p>Currently accepted language codes are:</p>
+<ul>
+<li>
+<p><code>en</code>: English (international)</p>
+</li>
+<li>
+<p><code>es</code>: Spanish (international)</p>
+<ul>
+<li><code>es-CL</code>: Spanish / Chile</li>
+<li><code>es-CO</code>: Spanish / Colombia</li>
+<li><code>es-MX</code>: Spanish / Mexico</li>
+<li><code>es-PE</code>: Spanish / Peru</li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong> that this header will be processed by all API endpoints although it will not be shown.</p>
+</section><section id="estimates" class="resource-group"><h2 class="group-heading">Estimates <a href="#estimates" class="permalink">&para;</a></h2><div id="estimates-estimate-journeys" class="resource"><h3 class="resource-heading">Estimate Journeys <a href="#estimates-estimate-journeys" class="permalink">&nbsp;&para;</a></h3><div id="estimates-estimate-journeys-post" class="action post"><h4 class="action-heading"><div class="name">Get Estimates</div><a href="#estimates-estimate-journeys-post" class="method post">POST</a><code class="uri">/api/v2/estimate</code></h4><p>To get an estimate the starting and end points need to be provided, together with the pick up time (the time at which the journey will start).</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/estimate</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span><br><span class="hljs-attribute">Accept-Language</span>: <span class="hljs-string">en</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.346</span>,
+        -<span class="hljs-number">1.116</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Central offices"</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Avenida Zaragoza"</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"39"</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Teruel"</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.346</span>,
+        -<span class="hljs-number">1.116</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Central offices"</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Avenida Zaragoza"</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"39"</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Teruel"</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span>
+    </span>}
   ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span>
+  "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
 </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
   "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
   "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">stops</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A 2-tuple with the pick up and drop off locations."</span>
     </span>}</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
+    "<span class="hljs-attribute">start_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The pick up datetime. It should follow the format: YYYY-MM-DD hh:mm. It should be in the local time of the pick up location."</span>
     </span>}
   </span>}</span>,
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"addr"</span>,
-    <span class="hljs-string">"city"</span>,
-    <span class="hljs-string">"country"</span>,
-    <span class="hljs-string">"loc"</span>
+    <span class="hljs-string">"stops"</span>,
+    <span class="hljs-string">"start_at"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.1185173</span>
-  ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-  "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"some_id"</span></span>,
-  "<span class="hljs-attribute">readonly</span>": <span class="hljs-value"><span class="hljs-literal">true</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">_id</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">readonly</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for shared locations, `false` for those that the curren user can edit."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"addr"</span>,
-    <span class="hljs-string">"city"</span>,
-    <span class="hljs-string">"country"</span>,
-    <span class="hljs-string">"loc"</span>,
-    <span class="hljs-string">"readonly"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Missing Data</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"A city"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.52276611328125</span>,
-    -<span class="hljs-number">3.890156745910645</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"You provided incomplete information"</span></span>,
-  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">some_attribute</span>": <span class="hljs-value">[
-      <span class="hljs-string">"Hello, world!"</span>,
-      <span class="hljs-string">"is too small"</span>,
-      <span class="hljs-string">"needs to be odd"</span>
-    ]</span>,
-    "<span class="hljs-attribute">some_other</span>": <span class="hljs-value">[
-      <span class="hljs-string">"Hello, world!"</span>,
-      <span class="hljs-string">"is required"</span>
-    ]
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error description"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">some_attribute</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">some_other</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
-        </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p>Returns an array of <code>Estimate</code>s.</p>
+<p>Some vehicle types, such as taxis, can not be estimated. In that case, the estimate will include the Vehicle Type details but the price-related fields will have null values (except when noted).
+Also some vehicle types can be not available for reservation, this is indicated by the asap_only flag, the boolean value false for asap_only flag indicates that the vehicle type can be reserved.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">vehicle_type</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"executive_id"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Executive Class"</span></span>,
+      "<span class="hljs-attribute">short_name</span>": <span class="hljs-value"><span class="hljs-string">"Executive"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A very large vehicle with comfortable seats"</span></span>,
+      "<span class="hljs-attribute">icons</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">regular</span>": <span class="hljs-value"><span class="hljs-string">"https://cabify.com/images/icons/vehicle_type/executive_27.png"</span>
       </span>}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Per field error information. Keys are field names, values are arrays of strings with error messages for the field."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="user-locations-update-location" class="resource"><h3 class="resource-heading">Update location <a href="#user-locations-update-location" class="permalink">&nbsp;&para;</a></h3><div id="user-locations-update-location-patch" class="action patch"><h4 class="action-heading"><div class="name">Update location</div><a href="#user-locations-update-location-patch" class="method patch">PATCH</a><code class="uri">/api/user/location/{id}</code></h4><p>Updates the information of a Location own by the authenticated user. Returns the updated Location.</p>
-<h4>Example URI</h4><div class="definition"><span class="method patch">PATCH</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/user/location/<span class="hljs-attribute" title="id">some_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>some_id</span></span><p>The identifier for the location to be edited</p>
-</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.1185173</span>
-  ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+      "<span class="hljs-attribute">reserved_only</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+      "<span class="hljs-attribute">asap_only</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+      "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
+      "<span class="hljs-attribute">icon</span>": <span class="hljs-value"><span class="hljs-string">"executive"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">total_price</span>": <span class="hljs-value"><span class="hljs-number">1234</span></span>,
+    "<span class="hljs-attribute">formatted_price</span>": <span class="hljs-value"><span class="hljs-string">"12.34€"</span></span>,
+    "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
+    "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value"><span class="hljs-string">"€"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
   "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Start point outside of Cabify regions</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p>If we request an estimate from outside the places we operate, a 404 error is returned. In this example, the start stop is in the Atlantic Ocean.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">0.1</span>,
+        <span class="hljs-number">0.1</span>
+      ]
+    </span>},
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.522751</span>,
+        -<span class="hljs-number">3.890156</span>
+      ]
     </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"addr"</span>,
-    <span class="hljs-string">"city"</span>,
-    <span class="hljs-string">"country"</span>,
-    <span class="hljs-string">"loc"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.1185173</span>
   ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-  "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"some_id"</span></span>,
-  "<span class="hljs-attribute">readonly</span>": <span class="hljs-value"><span class="hljs-literal">true</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">_id</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">readonly</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for shared locations, `false` for those that the curren user can edit."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"addr"</span>,
-    <span class="hljs-string">"city"</span>,
-    <span class="hljs-string">"country"</span>,
-    <span class="hljs-string">"loc"</span>,
-    <span class="hljs-string">"readonly"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Non-existent location</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.1185173</span>
-  ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"addr"</span>,
-    <span class="hljs-string">"city"</span>,
-    <span class="hljs-string">"country"</span>,
-    <span class="hljs-string">"loc"</span>
-  ]
+  "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2015-12-23 15:09"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"You provided incomplete information"</span></span>,
   "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
@@ -384,19 +143,674 @@
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"message"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Non-owned location</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="bookings" class="resource-group"><h2 class="group-heading">Bookings <a href="#bookings" class="permalink">&para;</a></h2><p>This resource allows booking and management of a future journey.</p>
+<div id="bookings-make-a-booking" class="resource"><h3 class="resource-heading">Make a booking <a href="#bookings-make-a-booking" class="permalink">&nbsp;&para;</a></h3><div id="bookings-make-a-booking-post" class="action post"><h4 class="action-heading"><div class="name">Make a booking</div><a href="#bookings-make-a-booking-post" class="method post">POST</a><code class="uri">/api/v2/journey</code></h4><p>This endpoint is meant to be used after receiving an estimate for a journey. The parameters used for the estimate can be reused and, additionally, the selector vehicle type needs to be provided.</p>
+<p>It is also possible to book a Cabify without any previous estimate if you have been provided with a <code>vehicle_type_id</code>.</p>
+<p>Additionally, in order to allow cross-referencing of Cabify journeys and any internal system used by API clients, the optional property <code>charge_code</code> can be used. It will not be interpreted by Cabify, but will be present in the invoices (contact your sales representative if you need it to be required and/or follow some format).</p>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/journey</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.346</span>,
+        -<span class="hljs-number">1.116</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Central offices"</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Avenida Zaragoza"</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"39"</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Teruel"</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.346</span>,
+        -<span class="hljs-number">1.116</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Central offices"</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Avenida Zaragoza"</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"39"</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Teruel"</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span></span>,
+  "<span class="hljs-attribute">vehicle_type_id</span>": <span class="hljs-value"><span class="hljs-string">"executive_id"</span></span>,
+  "<span class="hljs-attribute">charge_code</span>": <span class="hljs-value"><span class="hljs-string">"TAR987-654"</span></span>,
+  "<span class="hljs-attribute">rider</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+    "<span class="hljs-attribute">phone_prefix</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+    "<span class="hljs-attribute">phone_number</span>": <span class="hljs-value"><span class="hljs-string">"555-1234"</span></span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"jdoe@example.com"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Pick up at the red building next to the supermarket"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">stops</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A 2-tuple with the pick up and drop off locations."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">start_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The pick up datetime. It should follow the format: YYYY-MM-DD hh:mm. It should be in the local time of the pick up location."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">vehicle_type_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The unique identifier of the selected vehicle type, as returned by the estimator."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">charge_code</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"An optional code that will be displayed in the invoices generated by Cabify. Can be used to cross-reference the booking to internal data (such as a flight number reference, client id, etc…)."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">rider</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Rider name"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">phone_prefix</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Country prefix for the rider's phone number"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">phone_number</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Rider's phone number"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Rider's contact email"</span>
+        </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+        <span class="hljs-string">"name"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Optional information and contact details for the rider. Will allow the driver to contact her in case of any issues with the booking."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"An optional string providing some useful information for the driver."</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"stops"</span>,
+    <span class="hljs-string">"start_at"</span>,
+    <span class="hljs-string">"vehicle_type_id"</span>,
+    <span class="hljs-string">"rider"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"booking_id"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The unique id assigned to this booking."</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"_id"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="bookings-retrieve-booking-information" class="resource"><h3 class="resource-heading">Retrieve booking information <a href="#bookings-retrieve-booking-information" class="permalink">&nbsp;&para;</a></h3><div id="bookings-retrieve-booking-information-get" class="action get"><h4 class="action-heading"><div class="name">Retrieve booking information</div><a href="#bookings-retrieve-booking-information-get" class="method get">GET</a><code class="uri">/api/v2/journey/{id}</code></h4><p>For most uses, the (booking state)[#bookings-booking-state-get] is preferred.</p>
+<p>Use this endpoint to retrieve the full information about a booking, such as pricing or the initially provided information when making a booking.</p>
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/journey/<span class="hljs-attribute" title="id">0987654321abcdef0987654321abcdef</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>0987654321abcdef0987654321abcdef</span></span><p>the id corresponding to the journey to be retrieved. Access controls will be aplied to ensure that the authenticated user can access the journey</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.346</span>,
+        -<span class="hljs-number">1.116</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Central offices"</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Avenida Zaragoza"</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"39"</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Teruel"</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+        <span class="hljs-number">40.346</span>,
+        -<span class="hljs-number">1.116</span>
+      ]</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Central offices"</span></span>,
+      "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Avenida Zaragoza"</span></span>,
+      "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"39"</span></span>,
+      "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Teruel"</span></span>,
+      "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30T21:59:00.000Z"</span></span>,
+  "<span class="hljs-attribute">vehicle_type_id</span>": <span class="hljs-value"><span class="hljs-string">"executive_id"</span></span>,
+  "<span class="hljs-attribute">rider</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+    "<span class="hljs-attribute">phone_prefix</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+    "<span class="hljs-attribute">phone_number</span>": <span class="hljs-value"><span class="hljs-string">"555-1234"</span></span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"jdoe@example.com"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Pick up at the red building next to the supermarket"</span></span>,
+  "<span class="hljs-attribute">state</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"reserve"</span></span>,
+    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+      <span class="hljs-number">40.345041</span>,
+      -<span class="hljs-number">1.1185173</span>
+    ]</span>,
+    "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Martín"</span></span>,
+      "<span class="hljs-attribute">surname</span>": <span class="hljs-value"><span class="hljs-string">"de la Cuadra"</span></span>,
+      "<span class="hljs-attribute">mobile</span>": <span class="hljs-value"><span class="hljs-string">"555-1234"</span></span>,
+      "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">4.8</span></span>,
+      "<span class="hljs-attribute">avatar_url</span>": <span class="hljs-value"><span class="hljs-string">"https://cabify.com/drivers/123"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">vehicle</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">reg_plate</span>": <span class="hljs-value"><span class="hljs-string">"1234CDF"</span></span>,
+      "<span class="hljs-attribute">color</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"white"</span></span>,
+        "<span class="hljs-attribute">rgb</span>": <span class="hljs-value"><span class="hljs-string">"FFFFFF"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">make</span>": <span class="hljs-value"><span class="hljs-string">"Ford"</span></span>,
+        "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"Focus"</span></span>,
+        "<span class="hljs-attribute">brand_icon</span>": <span class="hljs-value"><span class="hljs-string">"https://cabify.com/vehicles/make/ford.png"</span>
+      </span>}
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">prices</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">price_base</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">amount</span>": <span class="hljs-value"><span class="hljs-number">2095</span></span>,
+      "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
+      "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value"><span class="hljs-string">"€"</span></span>,
+      "<span class="hljs-attribute">formatted</span>": <span class="hljs-value"><span class="hljs-string">"20.95 €"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">price_extra</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">amount</span>": <span class="hljs-value"><span class="hljs-number">2095</span></span>,
+      "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
+      "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value"><span class="hljs-string">"€"</span></span>,
+      "<span class="hljs-attribute">formatted</span>": <span class="hljs-value"><span class="hljs-string">"20.95 €"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">price</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">amount</span>": <span class="hljs-value"><span class="hljs-number">2095</span></span>,
+      "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
+      "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value"><span class="hljs-string">"€"</span></span>,
+      "<span class="hljs-attribute">formatted</span>": <span class="hljs-value"><span class="hljs-string">"20.95 €"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">discount</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">amount</span>": <span class="hljs-value"><span class="hljs-number">2095</span></span>,
+      "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
+      "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value"><span class="hljs-string">"€"</span></span>,
+      "<span class="hljs-attribute">formatted</span>": <span class="hljs-value"><span class="hljs-string">"20.95 €"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">total</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">amount</span>": <span class="hljs-value"><span class="hljs-number">2095</span></span>,
+      "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
+      "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value"><span class="hljs-string">"€"</span></span>,
+      "<span class="hljs-attribute">formatted</span>": <span class="hljs-value"><span class="hljs-string">"20.95 €"</span>
+    </span>}
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">stops</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A 2-tuple with the pick up and drop off locations."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">start_at</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the UTC start at date in the ISO 8601 format `YYYY-MM-DDThh:mm:ss.sTZD`."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">vehicle_type_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The unique identifier of the selected vehicle type, as returned by the estimator."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">rider</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Rider name"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">phone_prefix</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Country prefix for the rider's phone number"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">phone_number</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Rider's phone number"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Rider's contact email"</span>
+        </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+        <span class="hljs-string">"name"</span>
+      ]</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Optional information and contact details for the rider. Will allow the driver to contact her in case of any issues with the booking."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"An optional string providing some useful information for the driver."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">state</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">enum</span>": <span class="hljs-value">[
+            <span class="hljs-string">"reserve"</span>,
+            <span class="hljs-string">"hire"</span>,
+            <span class="hljs-string">"hired"</span>,
+            <span class="hljs-string">"arrived"</span>,
+            <span class="hljs-string">"pick up"</span>,
+            <span class="hljs-string">"no show"</span>,
+            <span class="hljs-string">"rider cancel"</span>,
+            <span class="hljs-string">"driver cancel"</span>,
+            <span class="hljs-string">"drop off"</span>,
+            <span class="hljs-string">"timeout"</span>,
+            <span class="hljs-string">"terminated"</span>,
+            <span class="hljs-string">"not found"</span>
+          ]
+        </span>}</span>,
+        "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the Cabify position at the time of the update"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"driver's given name."</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">surname</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"driver's family name"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">mobile</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the driver's phone number."</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">score</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"average driver rating in a 0 (awful) to 5 (perfect) range."</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">avatar_url</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the url to the driver picture at 80x80 pixels."</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information about the driver"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">vehicle</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">reg_plate</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"vehicle's registration plate number"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">color</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+              "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">code</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+                  "<span class="hljs-attribute">enum</span>": <span class="hljs-value">[
+                    <span class="hljs-string">"white"</span>,
+                    <span class="hljs-string">"silver"</span>,
+                    <span class="hljs-string">"gray"</span>,
+                    <span class="hljs-string">"black"</span>,
+                    <span class="hljs-string">"red"</span>,
+                    <span class="hljs-string">"maroon"</span>,
+                    <span class="hljs-string">"yellow"</span>,
+                    <span class="hljs-string">"olive"</span>,
+                    <span class="hljs-string">"lime"</span>,
+                    <span class="hljs-string">"green"</span>,
+                    <span class="hljs-string">"aqua"</span>,
+                    <span class="hljs-string">"teal"</span>,
+                    <span class="hljs-string">"blue"</span>,
+                    <span class="hljs-string">"navy"</span>,
+                    <span class="hljs-string">"fuchsia"</span>,
+                    <span class="hljs-string">"purple"</span>,
+                    <span class="hljs-string">"orange"</span>,
+                    <span class="hljs-string">"gold"</span>
+                  ]</span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"color code"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">rgb</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"suggested rgb color to represent the given code"</span>
+                </span>}
+              </span>}</span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the vehicle color"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+              "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">make</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Make name"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Model name"</span>
+                </span>}</span>,
+                "<span class="hljs-attribute">brand_icon</span>": <span class="hljs-value">{
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+                  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"url to the make icon, a 200x200 png image."</span>
+                </span>}
+              </span>}
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information about the vehicle"</span>
+        </span>}
+      </span>}
+    </span>}</span>,
+    "<span class="hljs-attribute">prices</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">price_base</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">amount</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">formatted</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+            <span class="hljs-string">"amount"</span>,
+            <span class="hljs-string">"currency"</span>,
+            <span class="hljs-string">"currency_symbol"</span>,
+            <span class="hljs-string">"formatted"</span>
+          ]</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The price by distance and waiting time or the minimun price."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">price_extra</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">amount</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">formatted</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+            <span class="hljs-string">"amount"</span>,
+            <span class="hljs-string">"currency"</span>,
+            <span class="hljs-string">"currency_symbol"</span>,
+            <span class="hljs-string">"formatted"</span>
+          ]</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The additional price: toll, parking..."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">price</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">amount</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">formatted</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+            <span class="hljs-string">"amount"</span>,
+            <span class="hljs-string">"currency"</span>,
+            <span class="hljs-string">"currency_symbol"</span>,
+            <span class="hljs-string">"formatted"</span>
+          ]</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The sum of price_base and price_extra."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">discount</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">amount</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">formatted</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+            <span class="hljs-string">"amount"</span>,
+            <span class="hljs-string">"currency"</span>,
+            <span class="hljs-string">"currency_symbol"</span>,
+            <span class="hljs-string">"formatted"</span>
+          ]</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The discount applied in the booking (vouchers, special zones or balances for the user)."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">total</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">amount</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">currency_symbol</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">formatted</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+            <span class="hljs-string">"amount"</span>,
+            <span class="hljs-string">"currency"</span>,
+            <span class="hljs-string">"currency_symbol"</span>,
+            <span class="hljs-string">"formatted"</span>
+          ]</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The subtraction between price and discount."</span>
+        </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+        <span class="hljs-string">"price_base"</span>,
+        <span class="hljs-string">"price"</span>,
+        <span class="hljs-string">"total"</span>
+      ]
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"stops"</span>,
+    <span class="hljs-string">"start_at"</span>,
+    <span class="hljs-string">"vehicle_type_id"</span>,
+    <span class="hljs-string">"rider"</span>,
+    <span class="hljs-string">"state"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="bookings-booking-state" class="resource"><h3 class="resource-heading">Booking State <a href="#bookings-booking-state" class="permalink">&nbsp;&para;</a></h3><div id="bookings-booking-state-post" class="action post"><h4 class="action-heading"><div class="name">Cancel booking</div><a href="#bookings-booking-state-post" class="method post">POST</a><code class="uri">/api/v2/journey/{id}/state</code></h4><p>Any previously booked journey can be canceled using its <code>_id</code> field, as long as:</p>
+<ul>
+<li>
+<p>The journey has not started yet</p>
+</li>
+<li>
+<p>It has been created by the same API user</p>
+</li>
+</ul>
+<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/journey/<span class="hljs-attribute" title="id">0987654321abcdef0987654321abcdef</span>/state</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>0987654321abcdef0987654321abcdef</span></span><p>the id corresponding to the journey that is to be canceled. It must be in the future and owned by the API user identified by the oauth token.</p>
+</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p>Changes the booking state to the provided name.</p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"rider cancel"</span>
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">enum</span>": <span class="hljs-value">[
+        <span class="hljs-string">"rider cancel"</span>
+      ]
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"name"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"reserve"</span></span>,
   "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
     <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.118517</span>
+    -<span class="hljs-number">1.1185173</span>
   ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Martín"</span></span>,
+    "<span class="hljs-attribute">surname</span>": <span class="hljs-value"><span class="hljs-string">"de la Cuadra"</span></span>,
+    "<span class="hljs-attribute">mobile</span>": <span class="hljs-value"><span class="hljs-string">"555-1234"</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">4.8</span></span>,
+    "<span class="hljs-attribute">avatar_url</span>": <span class="hljs-value"><span class="hljs-string">"https://cabify.com/drivers/123"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">vehicle</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">reg_plate</span>": <span class="hljs-value"><span class="hljs-string">"1234CDF"</span></span>,
+    "<span class="hljs-attribute">color</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"white"</span></span>,
+      "<span class="hljs-attribute">rgb</span>": <span class="hljs-value"><span class="hljs-string">"FFFFFF"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">make</span>": <span class="hljs-value"><span class="hljs-string">"Ford"</span></span>,
+      "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"Focus"</span></span>,
+      "<span class="hljs-attribute">brand_icon</span>": <span class="hljs-value"><span class="hljs-string">"https://cabify.com/vehicles/make/ford.png"</span>
+    </span>}
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">enum</span>": <span class="hljs-value">[
+        <span class="hljs-string">"reserve"</span>,
+        <span class="hljs-string">"hire"</span>,
+        <span class="hljs-string">"hired"</span>,
+        <span class="hljs-string">"arrived"</span>,
+        <span class="hljs-string">"pick up"</span>,
+        <span class="hljs-string">"no show"</span>,
+        <span class="hljs-string">"rider cancel"</span>,
+        <span class="hljs-string">"driver cancel"</span>,
+        <span class="hljs-string">"drop off"</span>,
+        <span class="hljs-string">"timeout"</span>,
+        <span class="hljs-string">"terminated"</span>,
+        <span class="hljs-string">"not found"</span>
+      ]
+    </span>}</span>,
+    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the Cabify position at the time of the update"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"driver's given name."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">surname</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"driver's family name"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">mobile</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the driver's phone number."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">score</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"average driver rating in a 0 (awful) to 5 (perfect) range."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">avatar_url</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the url to the driver picture at 80x80 pixels."</span>
+        </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information about the driver"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">vehicle</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">reg_plate</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"vehicle's registration plate number"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">color</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">code</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">enum</span>": <span class="hljs-value">[
+                <span class="hljs-string">"white"</span>,
+                <span class="hljs-string">"silver"</span>,
+                <span class="hljs-string">"gray"</span>,
+                <span class="hljs-string">"black"</span>,
+                <span class="hljs-string">"red"</span>,
+                <span class="hljs-string">"maroon"</span>,
+                <span class="hljs-string">"yellow"</span>,
+                <span class="hljs-string">"olive"</span>,
+                <span class="hljs-string">"lime"</span>,
+                <span class="hljs-string">"green"</span>,
+                <span class="hljs-string">"aqua"</span>,
+                <span class="hljs-string">"teal"</span>,
+                <span class="hljs-string">"blue"</span>,
+                <span class="hljs-string">"navy"</span>,
+                <span class="hljs-string">"fuchsia"</span>,
+                <span class="hljs-string">"purple"</span>,
+                <span class="hljs-string">"orange"</span>,
+                <span class="hljs-string">"gold"</span>
+              ]</span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"color code"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">rgb</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"suggested rgb color to represent the given code"</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the vehicle color"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">make</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Make name"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Model name"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">brand_icon</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"url to the make icon, a 200x200 png image."</span>
+            </span>}
+          </span>}
+        </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information about the vehicle"</span>
+    </span>}
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>with invalid state name</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"invalid"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"You provided incomplete information"</span></span>,
   "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">some_attribute</span>": <span class="hljs-value">[
@@ -433,256 +847,150 @@
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"message"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="here-service" class="resource-group"><h2 class="group-heading">Here Service <a href="#here-service" class="permalink">&para;</a></h2><div id="here-service-what-is-here?" class="resource"><h3 class="resource-heading">What is here? <a href="#here-service-what-is-here?" class="permalink">&nbsp;&para;</a></h3><div id="here-service-what-is-here?-get" class="action get"><h4 class="action-heading"><div class="name">What is here?</div><a href="#here-service-what-is-here?-get" class="method get">GET</a><code class="uri">/api/here{?loc}</code></h4><p>Returns the geolocalized information for a given point in a single request.</p>
-<p>Information provided by Here might be available from other endopoints using several requests. The purpose of here is to reduce network latency.</p>
-<p>An optional date and time can be indicated. This is presently designed to be used with reservation requests in order to check availability of vehicle types on the given date and time.</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/here?<span class="hljs-attribute">loc=</span><span class="hljs-literal">40.345041, -1.1185173</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>loc</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>40.345041, -1.1185173</span></span><p>A pair of latitude, longitude coordinates</p>
-</dd><dt>start_at</dt><dd><code>string</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>2020-12-31 23:59</span></span><p>A datetime value in the local timezone. Information returned will be valid for the indicated time, or <em>now</em> if not provided.</p>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="bookings-booking-state-get" class="action get"><h4 class="action-heading"><div class="name">Check booking state</div><a href="#bookings-booking-state-get" class="method get">GET</a><code class="uri">/api/v2/journey/{id}/state</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/journey/<span class="hljs-attribute" title="id">0987654321abcdef0987654321abcdef</span>/state</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>0987654321abcdef0987654321abcdef</span></span><p>the id of the journey whose state is to be checked.</p>
 </dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">location</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-      <span class="hljs-number">40.345041</span>,
-      -<span class="hljs-number">1.1185173</span>
-    ]</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-    "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"some_id"</span></span>,
-    "<span class="hljs-attribute">readonly</span>": <span class="hljs-value"><span class="hljs-literal">true</span>
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"reserve"</span></span>,
+  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
+    <span class="hljs-number">40.345041</span>,
+    -<span class="hljs-number">1.1185173</span>
+  ]</span>,
+  "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Martín"</span></span>,
+    "<span class="hljs-attribute">surname</span>": <span class="hljs-value"><span class="hljs-string">"de la Cuadra"</span></span>,
+    "<span class="hljs-attribute">mobile</span>": <span class="hljs-value"><span class="hljs-string">"555-1234"</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">4.8</span></span>,
+    "<span class="hljs-attribute">avatar_url</span>": <span class="hljs-value"><span class="hljs-string">"https://cabify.com/drivers/123"</span>
   </span>}</span>,
-  "<span class="hljs-attribute">vehicle_types</span>": <span class="hljs-value">[
-    {
-      "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"some_id"</span></span>,
-      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Deluxe Car"</span></span>,
-      "<span class="hljs-attribute">short_name</span>": <span class="hljs-value"><span class="hljs-string">"Deluxe"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"a nice large car with champagne"</span></span>,
-      "<span class="hljs-attribute">currency</span>": <span class="hljs-value"><span class="hljs-string">"EUR"</span></span>,
-      "<span class="hljs-attribute">icon</span>": <span class="hljs-value"><span class="hljs-string">"executive"</span></span>,
-      "<span class="hljs-attribute">reserved_only</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">asap_only</span>": <span class="hljs-value"><span class="hljs-literal">false</span>
+  "<span class="hljs-attribute">vehicle</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">reg_plate</span>": <span class="hljs-value"><span class="hljs-string">"1234CDF"</span></span>,
+    "<span class="hljs-attribute">color</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"white"</span></span>,
+      "<span class="hljs-attribute">rgb</span>": <span class="hljs-value"><span class="hljs-string">"FFFFFF"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">make</span>": <span class="hljs-value"><span class="hljs-string">"Ford"</span></span>,
+      "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"Focus"</span></span>,
+      "<span class="hljs-attribute">brand_icon</span>": <span class="hljs-value"><span class="hljs-string">"https://cabify.com/vehicles/make/ford.png"</span>
     </span>}
-  ]
+  </span>}
 </span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
   "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
   "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">location</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">enum</span>": <span class="hljs-value">[
+        <span class="hljs-string">"reserve"</span>,
+        <span class="hljs-string">"hire"</span>,
+        <span class="hljs-string">"hired"</span>,
+        <span class="hljs-string">"arrived"</span>,
+        <span class="hljs-string">"pick up"</span>,
+        <span class="hljs-string">"no show"</span>,
+        <span class="hljs-string">"rider cancel"</span>,
+        <span class="hljs-string">"driver cancel"</span>,
+        <span class="hljs-string">"drop off"</span>,
+        <span class="hljs-string">"timeout"</span>,
+        <span class="hljs-string">"terminated"</span>,
+        <span class="hljs-string">"not found"</span>
+      ]
+    </span>}</span>,
+    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the Cabify position at the time of the update"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
       "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"driver's given name."</span>
         </span>}</span>,
-        "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">surname</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"driver's family name"</span>
         </span>}</span>,
-        "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">mobile</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the driver's phone number."</span>
         </span>}</span>,
-        "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">score</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"average driver rating in a 0 (awful) to 5 (perfect) range."</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">avatar_url</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">_id</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-        </span>}</span>,
-        "<span class="hljs-attribute">readonly</span>": <span class="hljs-value">{
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for shared locations, `false` for those that the curren user can edit."</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the url to the driver picture at 80x80 pixels."</span>
         </span>}
       </span>}</span>,
-      "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-        <span class="hljs-string">"name"</span>,
-        <span class="hljs-string">"addr"</span>,
-        <span class="hljs-string">"city"</span>,
-        <span class="hljs-string">"country"</span>,
-        <span class="hljs-string">"loc"</span>,
-        <span class="hljs-string">"readonly"</span>
-      ]
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information about the driver"</span>
     </span>}</span>,
-    "<span class="hljs-attribute">vehicle_types</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
+    "<span class="hljs-attribute">vehicle</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">reg_plate</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"vehicle's registration plate number"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">color</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">code</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">enum</span>": <span class="hljs-value">[
+                <span class="hljs-string">"white"</span>,
+                <span class="hljs-string">"silver"</span>,
+                <span class="hljs-string">"gray"</span>,
+                <span class="hljs-string">"black"</span>,
+                <span class="hljs-string">"red"</span>,
+                <span class="hljs-string">"maroon"</span>,
+                <span class="hljs-string">"yellow"</span>,
+                <span class="hljs-string">"olive"</span>,
+                <span class="hljs-string">"lime"</span>,
+                <span class="hljs-string">"green"</span>,
+                <span class="hljs-string">"aqua"</span>,
+                <span class="hljs-string">"teal"</span>,
+                <span class="hljs-string">"blue"</span>,
+                <span class="hljs-string">"navy"</span>,
+                <span class="hljs-string">"fuchsia"</span>,
+                <span class="hljs-string">"purple"</span>,
+                <span class="hljs-string">"orange"</span>,
+                <span class="hljs-string">"gold"</span>
+              ]</span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"color code"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">rgb</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"suggested rgb color to represent the given code"</span>
+            </span>}
+          </span>}</span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"the vehicle color"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+          "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">make</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Make name"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">model</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Model name"</span>
+            </span>}</span>,
+            "<span class="hljs-attribute">brand_icon</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"url to the make icon, a 200x200 png image."</span>
+            </span>}
+          </span>}
+        </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"information about the vehicle"</span>
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="places-service" class="resource-group"><h2 class="group-heading">Places Service <a href="#places-service" class="permalink">&para;</a></h2><div id="places-service-get-suggestions" class="resource"><h3 class="resource-heading">Get suggestions <a href="#places-service-get-suggestions" class="permalink">&nbsp;&para;</a></h3><div id="places-service-get-suggestions-get" class="action get"><h4 class="action-heading"><div class="name">Get suggestions</div><a href="#places-service-get-suggestions-get" class="method get">GET</a><code class="uri">/api/places/autocomplete{?q}</code></h4><p>Retrieves a list of suggestions based on partial text input given on the <code>q</code> parameter</p>
-<p>The <strong>response</strong> will be an array of Suggestions</p>
-<p>A Suggestion object is a presentation-oriented object with pre-formatted values. It is
-tailored for a two line display, with a highlighted title and a dimmed subtitle below.</p>
-<p>An id is provided so it can be inflated to a full location object.</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/places/autocomplete?<span class="hljs-attribute">q=</span><span class="hljs-literal">Baraj</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>q</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Baraj</span></span></dd><dt>loc</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>40.345041, -1.1185173</span></span><p>A pair of latitude, longitude coordinates</p>
-</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
-  {
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"Barajas"</span></span>,
-    "<span class="hljs-attribute">subtitle</span>": <span class="hljs-value"><span class="hljs-string">"Madrid, Spain"</span></span>,
-    "<span class="hljs-attribute">location_id</span>": <span class="hljs-value"><span class="hljs-string">"gp:ChIJ-4yAzOAxQg0R6ty2Gn22jUk"</span></span>,
-    "<span class="hljs-attribute">source</span>": <span class="hljs-value"><span class="hljs-string">"google"</span>
-  </span>}
-]</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="place-retrieval" class="resource-group"><h2 class="group-heading">Place retrieval <a href="#place-retrieval" class="permalink">&para;</a></h2><p>Place retrieval endpoint return a single <strong>Location</strong> object.</p>
-<p>A Location object contains all the information for displaying about a place in an structured format, allowing for custom presentations.</p>
-<p>It also includes aditional information useful for requesting journeys from it (currently, the actual coordinates and the saved instructions to the driver)</p>
-<p>Locations can have different sources, both shared (from Google Places or Cabify) and personal (saved by the User or Client).</p>
-<div id="place-retrieval-reverse-geocoding" class="resource"><h3 class="resource-heading">Reverse Geocoding <a href="#place-retrieval-reverse-geocoding" class="permalink">&nbsp;&para;</a></h3><div id="place-retrieval-reverse-geocoding-get" class="action get"><h4 class="action-heading"><div class="name">Reverse Geocoding</div><a href="#place-retrieval-reverse-geocoding-get" class="method get">GET</a><code class="uri">/api/places/location{?loc}</code></h4><p>Retrieves the Location at the given location.</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/places/location?<span class="hljs-attribute">loc=</span><span class="hljs-literal">40.345041, -1.1185173</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>loc</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>40.345041, -1.1185173</span></span><p>A pair of latitude, longitude coordinates</p>
-</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.1185173</span>
-  ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-  "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"some_id"</span></span>,
-  "<span class="hljs-attribute">readonly</span>": <span class="hljs-value"><span class="hljs-literal">true</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">_id</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">readonly</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for shared locations, `false` for those that the curren user can edit."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"addr"</span>,
-    <span class="hljs-string">"city"</span>,
-    <span class="hljs-string">"country"</span>,
-    <span class="hljs-string">"loc"</span>,
-    <span class="hljs-string">"readonly"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="place-retrieval-inflating-a-suggestion" class="resource"><h3 class="resource-heading">Inflating a Suggestion <a href="#place-retrieval-inflating-a-suggestion" class="permalink">&nbsp;&para;</a></h3><div id="place-retrieval-inflating-a-suggestion-get" class="action get"><h4 class="action-heading"><div class="name">Inflating a Suggestion</div><a href="#place-retrieval-inflating-a-suggestion-get" class="method get">GET</a><code class="uri">/api/places/location/{id}</code></h4><p>Given a Suggestion identifier, it returns the location with the full information for it.</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/places/location/<span class="hljs-attribute" title="id">0123456789abcdef0123456789abcdef</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>0123456789abcdef0123456789abcdef</span></span><p>request</p>
-</dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>`successful`</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"My saved location"</span></span>,
-  "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Location Street"</span></span>,
-  "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"109-1234"</span></span>,
-  "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Fakopolis"</span></span>,
-  "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"ES"</span></span>,
-  "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Pick me up by the traffic lights"</span></span>,
-  "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-    <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.1185173</span>
-  ]</span>,
-  "<span class="hljs-attribute">private</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-  "<span class="hljs-attribute">_id</span>": <span class="hljs-value"><span class="hljs-string">"some_id"</span></span>,
-  "<span class="hljs-attribute">readonly</span>": <span class="hljs-value"><span class="hljs-literal">true</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Custom name for this Location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">addr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street address part of the location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">num</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The street number"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The city name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">country</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The country code"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">instr</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The default instructions for the driver"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">loc</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The [latitude, longitude] for this location"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">private</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for places the user doesn't want to share its name"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">_id</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">readonly</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"It is `true` for shared locations, `false` for those that the curren user can edit."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"addr"</span>,
-    <span class="hljs-string">"city"</span>,
-    <span class="hljs-string">"country"</span>,
-    <span class="hljs-string">"loc"</span>,
-    <span class="hljs-string">"readonly"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 08 Apr 2016</p><script>/* eslint-env browser */
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="webhooks" class="resource-group"><h2 class="group-heading">Webhooks <a href="#webhooks" class="permalink">&para;</a></h2><h3 id="header-booking-status-updates">Booking status updates <a class="permalink" href="#header-booking-status-updates" aria-hidden="true">¶</a></h3>
+<p>Booking status changes can be notified through a webhook. At the moment, you can configure the URL where the URL will be <code>POST</code>ing the updates by contacting customer support.</p>
+<p>The given URL will be invoked with a json body containing the same information as the [Check booking status] response.</p>
+</section>
+</span></code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 19 Apr 2016</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 
