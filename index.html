@@ -109,7 +109,12 @@ If the user needs to perform any action to grant access to the application (incl
       "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"s/n"</span></span>,
       "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Madrid"</span></span>,
       "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span></span>,
-      "<span class="hljs-attribute">hit_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
+      "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">contact</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+        "<span class="hljs-attribute">mobile_cc</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+        "<span class="hljs-attribute">mobile_num</span>": <span class="hljs-value"><span class="hljs-string">"611111113"</span>
+      </span>}
     </span>},
     {
       "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
@@ -121,7 +126,12 @@ If the user needs to perform any action to grant access to the application (incl
       "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"s/n"</span></span>,
       "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Madrid"</span></span>,
       "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span></span>,
-      "<span class="hljs-attribute">hit_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
+      "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">contact</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+        "<span class="hljs-attribute">mobile_cc</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+        "<span class="hljs-attribute">mobile_num</span>": <span class="hljs-value"><span class="hljs-string">"611111113"</span>
+      </span>}
     </span>}
   ]</span>,
   "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
@@ -233,6 +243,8 @@ Also some vehicle types can be not available for reservation, this is indicated 
 <p>If you need to do a asap journey, you only need to set the <code>start_at</code> parameter as <code>null</code>, this will make we considered
 the <code>start_at</code> as the current time and the <code>start_type</code> of the journey as <code>asap</code>.</p>
 <p>Additionally, in order to allow cross-referencing of Cabify journeys and any internal system used by API clients, the optional property <code>charge_code</code> can be used. It will not be interpreted by Cabify, but will be present in the invoices (contact your sales representative if you need it to be required and/or follow some format).</p>
+<p><strong>Cabify Delivery Service</strong></p>
+<p>Cabify also offers a delivery service which you can use through the API. To use the delivery service you should make a booking using a vehicle type called <code>delivery</code> or <code>cabify express</code>. In the case the journey is <code>delivery</code> it will have the <code>service_type</code> attribute with value <code>delivery</code>, in other case the value of this attribute will be <code>standard</code>. Besides, you should fill the stop contact attributes (name, mobile_cc, mobile_num) which you can see in the request body of this request.</p>
 <h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/journey</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
     {
@@ -245,7 +257,12 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
       "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"s/n"</span></span>,
       "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Madrid"</span></span>,
       "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span></span>,
-      "<span class="hljs-attribute">hit_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
+      "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">contact</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+        "<span class="hljs-attribute">mobile_cc</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+        "<span class="hljs-attribute">mobile_num</span>": <span class="hljs-value"><span class="hljs-string">"611111113"</span>
+      </span>}
     </span>},
     {
       "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
@@ -257,7 +274,12 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
       "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"s/n"</span></span>,
       "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Madrid"</span></span>,
       "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span></span>,
-      "<span class="hljs-attribute">hit_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
+      "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">contact</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+        "<span class="hljs-attribute">mobile_cc</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+        "<span class="hljs-attribute">mobile_num</span>": <span class="hljs-value"><span class="hljs-string">"611111113"</span>
+      </span>}
     </span>}
   ]</span>,
   "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span></span>,
@@ -360,6 +382,12 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
       "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"s/n"</span></span>,
       "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Madrid"</span></span>,
       "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span></span>,
+      "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">contact</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+        "<span class="hljs-attribute">mobile_cc</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+        "<span class="hljs-attribute">mobile_num</span>": <span class="hljs-value"><span class="hljs-string">"611111113"</span>
+      </span>}</span>,
       "<span class="hljs-attribute">hit_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
     </span>},
     {
@@ -372,11 +400,18 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
       "<span class="hljs-attribute">num</span>": <span class="hljs-value"><span class="hljs-string">"s/n"</span></span>,
       "<span class="hljs-attribute">city</span>": <span class="hljs-value"><span class="hljs-string">"Madrid"</span></span>,
       "<span class="hljs-attribute">country</span>": <span class="hljs-value"><span class="hljs-string">"Spain"</span></span>,
+      "<span class="hljs-attribute">instr</span>": <span class="hljs-value"><span class="hljs-string">"Hello, world!"</span></span>,
+      "<span class="hljs-attribute">contact</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
+        "<span class="hljs-attribute">mobile_cc</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
+        "<span class="hljs-attribute">mobile_num</span>": <span class="hljs-value"><span class="hljs-string">"611111113"</span>
+      </span>}</span>,
       "<span class="hljs-attribute">hit_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30 22:59"</span>
     </span>}
   ]</span>,
   "<span class="hljs-attribute">start_at</span>": <span class="hljs-value"><span class="hljs-string">"2022-12-30T21:59:00.000Z"</span></span>,
   "<span class="hljs-attribute">vehicle_type_id</span>": <span class="hljs-value"><span class="hljs-string">"executive_id"</span></span>,
+  "<span class="hljs-attribute">service_type</span>": <span class="hljs-value"><span class="hljs-string">"standard"</span></span>,
   "<span class="hljs-attribute">rider</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Doe"</span></span>,
     "<span class="hljs-attribute">phone_prefix</span>": <span class="hljs-value"><span class="hljs-string">"+34"</span></span>,
@@ -465,6 +500,10 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
     "<span class="hljs-attribute">vehicle_type_id</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
       "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"The unique identifier of the selected vehicle type, as returned by the estimator."</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">service_type</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Service type of the journey. It can be standard or delivery."</span>
     </span>}</span>,
     "<span class="hljs-attribute">rider</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -1241,7 +1280,7 @@ The URL’s should start with <code>cabify://cabify</code>. Keep in mind that ev
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/profile</span></div></div></div><div id="mobile-deeplink-help" class="resource"><h3 class="resource-heading">Help <a href="#mobile-deeplink-help" class="permalink">&nbsp;&para;</a></h3><div id="mobile-deeplink-help-get" class="action get"><h4 class="action-heading"><div class="name">Help</div><a href="#mobile-deeplink-help-get" class="method get">GET</a><code class="uri">/contact</code></h4><p>Open the help center screen</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/contact</span></div></div></div><div id="mobile-deeplink-pricing" class="resource"><h3 class="resource-heading">Pricing <a href="#mobile-deeplink-pricing" class="permalink">&nbsp;&para;</a></h3><div id="mobile-deeplink-pricing-get" class="action get"><h4 class="action-heading"><div class="name">Pricing</div><a href="#mobile-deeplink-pricing-get" class="method get">GET</a><code class="uri">/pricing</code></h4><p>Open pricing screen</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/pricing</span></div></div></div><div id="mobile-deeplink-invite-friends" class="resource"><h3 class="resource-heading">Invite friends <a href="#mobile-deeplink-invite-friends" class="permalink">&nbsp;&para;</a></h3><div id="mobile-deeplink-invite-friends-get" class="action get"><h4 class="action-heading"><div class="name">Invite friends</div><a href="#mobile-deeplink-invite-friends-get" class="method get">GET</a><code class="uri">/invite_your_friends</code></h4><p>Open invite your friends screen</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/invite_your_friends</span></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 29 Mar 2017</p><script>/* eslint-env browser */
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/invite_your_friends</span></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 10 May 2017</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 
