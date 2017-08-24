@@ -194,8 +194,8 @@ order to authenticate an user.</p>
   "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-        <span class="hljs-number">40.416947</span>,
-        -<span class="hljs-number">3.705717</span>
+        <span class="hljs-number">40.4169473</span>,
+        -<span class="hljs-number">3.7057172</span>
       ]</span>,
       "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Puerta del Sol"</span></span>,
       "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Plaza de la Puerta del Sol"</span></span>,
@@ -211,8 +211,8 @@ order to authenticate an user.</p>
     </span>},
     {
       "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-        <span class="hljs-number">40.416947</span>,
-        -<span class="hljs-number">3.705717</span>
+        <span class="hljs-number">40.4169473</span>,
+        -<span class="hljs-number">3.7057172</span>
       ]</span>,
       "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Puerta del Sol"</span></span>,
       "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Plaza de la Puerta del Sol"</span></span>,
@@ -331,15 +331,19 @@ order to authenticate an user.</p>
 <p>It is also possible to book a Cabify without any previous estimate if you have been provided with a <code>vehicle_type_id</code>.</p>
 <p>If you need to do a asap journey, you only need to set the <code>start_at</code> parameter as <code>null</code>, this will make we considered
 the <code>start_at</code> as the current time and the <code>start_type</code> of the journey as <code>asap</code>.</p>
+<p>If you need to book a journey for person different from the one who belongs the Auth Token, you can specify its information
+using the <code>rider</code> attribute in the request body. In other case, you can just omit this attribute, and the journey will
+be create for the owner of the Auth Token.</p>
 <p>Additionally, in order to allow cross-referencing of Cabify journeys and any internal system used by API clients, the optional property <code>charge_code</code> can be used. It will not be interpreted by Cabify, but will be present in the invoices (contact your sales representative if you need it to be required and/or follow some format).</p>
 <p><strong>Cabify Delivery Service</strong></p>
-<p>Cabify also offers a delivery service which you can use through the API. To use the delivery service you should make a booking using a vehicle type called <code>delivery</code> or <code>cabify express</code>. In the case the journey is <code>delivery</code> it will have the <code>service_type</code> attribute with value <code>delivery</code>, in other case the value of this attribute will be <code>standard</code>. Besides, you should fill the stop contact attributes (name, mobile_cc, mobile_num) which you can see in the request body of this request.</p>
+<p>Cabify also offers a delivery service which you can use on the API. To use the delivery service you should make a booking using a <code>vehicle_type_id</code> which belongs to a vehicle type called <code>delivery</code> or <code>cabify express</code>. You can get this id from the response of the estimate resource. Besides, you should fill the stop contact attributes (name, mobile_cc, mobile_num) which you can see in the request body of this request.</p>
+<p>When you book a journey with a delivery vehicle type, the response of the booking will include an attribute <code>service_type</code> with value <code>delivery</code>. In other case, the value of this attribute will be <code>standard</code>.</p>
 <h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/journey</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer YOUR_AUTH_TOKEN</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-        <span class="hljs-number">40.416947</span>,
-        -<span class="hljs-number">3.705717</span>
+        <span class="hljs-number">40.4169473</span>,
+        -<span class="hljs-number">3.7057172</span>
       ]</span>,
       "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Puerta del Sol"</span></span>,
       "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Plaza de la Puerta del Sol"</span></span>,
@@ -371,7 +375,7 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
   "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">stops</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"An array with the pick up location (required) and drop off locations (optional)."</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"An array with the pick up location (required) and drop off location (optional)."</span>
     </span>}</span>,
     "<span class="hljs-attribute">start_at</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
@@ -439,6 +443,49 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"_id"</span>
   ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json: charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"You provided incomplete information"</span></span>,
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">some_attribute</span>": <span class="hljs-value">[
+      <span class="hljs-string">"Hello, world!"</span>,
+      <span class="hljs-string">"is too small"</span>,
+      <span class="hljs-string">"needs to be odd"</span>
+    ]</span>,
+    "<span class="hljs-attribute">some_other</span>": <span class="hljs-value">[
+      <span class="hljs-string">"Hello, world!"</span>,
+      <span class="hljs-string">"is required"</span>
+    ]
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error description"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
+      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">some_attribute</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+          "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+          </span>}
+        </span>}</span>,
+        "<span class="hljs-attribute">some_other</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
+          "<span class="hljs-attribute">items</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+          </span>}
+        </span>}
+      </span>}</span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Per field error information. Keys are field names, values are arrays of strings with error messages for the field."</span>
+    </span>}
+  </span>}</span>,
+  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
+    <span class="hljs-string">"message"</span>
+  ]</span>,
+  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="bookings-retrieve-booking-information" class="resource"><h3 class="resource-heading">Retrieve booking information <a href="#bookings-retrieve-booking-information" class="permalink">&nbsp;&para;</a></h3><div id="bookings-retrieve-booking-information-get" class="action get"><h4 class="action-heading"><div class="name">Retrieve booking information</div><a href="#bookings-retrieve-booking-information-get" class="method get">GET</a><code class="uri">/api/v2/journey/{id}</code></h4><p>For most uses, the (booking state)[#bookings-booking-state-get] is preferred.</p>
 <p>Use this endpoint to retrieve the full information about a booking, such as pricing or the initially provided information when making a booking.</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v2/journey/<span class="hljs-attribute" title="id">0987654321abcdef0987654321abcdef</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>0987654321abcdef0987654321abcdef</span></span><p>the id corresponding to the journey to be retrieved. Access controls will be aplied to ensure that the authenticated user can access the journey</p>
@@ -446,8 +493,8 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
   "<span class="hljs-attribute">stops</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-        <span class="hljs-number">40.416947</span>,
-        -<span class="hljs-number">3.705717</span>
+        <span class="hljs-number">40.4169473</span>,
+        -<span class="hljs-number">3.7057172</span>
       ]</span>,
       "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Puerta del Sol"</span></span>,
       "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Plaza de la Puerta del Sol"</span></span>,
@@ -464,8 +511,8 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
     </span>},
     {
       "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
-        <span class="hljs-number">40.416947</span>,
-        -<span class="hljs-number">3.705717</span>
+        <span class="hljs-number">40.4169473</span>,
+        -<span class="hljs-number">3.7057172</span>
       ]</span>,
       "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Puerta del Sol"</span></span>,
       "<span class="hljs-attribute">addr</span>": <span class="hljs-value"><span class="hljs-string">"Plaza de la Puerta del Sol"</span></span>,
@@ -497,7 +544,7 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
     "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"reserve"</span></span>,
     "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
       <span class="hljs-number">40.345041</span>,
-      -<span class="hljs-number">1.118517</span>
+      -<span class="hljs-number">1.1185173</span>
     ]</span>,
     "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"0987654321abcdef0987654321abcdef"</span></span>,
@@ -967,7 +1014,7 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
   "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"reserve"</span></span>,
   "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
     <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.118517</span>
+    -<span class="hljs-number">1.1185173</span>
   ]</span>,
   "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"0987654321abcdef0987654321abcdef"</span></span>,
@@ -1157,7 +1204,7 @@ the <code>start_at</code> as the current time and the <code>start_type</code> of
   "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"reserve"</span></span>,
   "<span class="hljs-attribute">loc</span>": <span class="hljs-value">[
     <span class="hljs-number">40.345041</span>,
-    -<span class="hljs-number">1.118517</span>
+    -<span class="hljs-number">1.1185173</span>
   ]</span>,
   "<span class="hljs-attribute">driver</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"0987654321abcdef0987654321abcdef"</span></span>,
@@ -1352,7 +1399,7 @@ The URL’s should start with <code>cabify://cabify</code>. Keep in mind that ev
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/profile</span></div></div></div><div id="mobile-deeplink-help" class="resource"><h3 class="resource-heading">Help <a href="#mobile-deeplink-help" class="permalink">&nbsp;&para;</a></h3><div id="mobile-deeplink-help-get" class="action get"><h4 class="action-heading"><div class="name">Help</div><a href="#mobile-deeplink-help-get" class="method get">GET</a><code class="uri">/contact</code></h4><p>Open the help center screen</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/contact</span></div></div></div><div id="mobile-deeplink-pricing" class="resource"><h3 class="resource-heading">Pricing <a href="#mobile-deeplink-pricing" class="permalink">&nbsp;&para;</a></h3><div id="mobile-deeplink-pricing-get" class="action get"><h4 class="action-heading"><div class="name">Pricing</div><a href="#mobile-deeplink-pricing-get" class="method get">GET</a><code class="uri">/pricing</code></h4><p>Open pricing screen</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/pricing</span></div></div></div><div id="mobile-deeplink-invite-friends" class="resource"><h3 class="resource-heading">Invite friends <a href="#mobile-deeplink-invite-friends" class="permalink">&nbsp;&para;</a></h3><div id="mobile-deeplink-invite-friends-get" class="action get"><h4 class="action-heading"><div class="name">Invite friends</div><a href="#mobile-deeplink-invite-friends-get" class="method get">GET</a><code class="uri">/invite_your_friends</code></h4><p>Open invite your friends screen</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/invite_your_friends</span></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 01 Aug 2017</p><script>/* eslint-env browser */
+<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/invite_your_friends</span></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 24 Aug 2017</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 
